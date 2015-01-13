@@ -1,7 +1,7 @@
 package net.maiatoday.minotaur;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -42,12 +41,22 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        switch (id){
+            case R.id.action_settings:
+                gotoSettings();
+                break;
+            case R.id.action_blank:
+                gotoBlank(null);
+                break;
+        };
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void gotoSettings() {
+
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -66,5 +75,11 @@ public class MainActivity extends ActionBarActivity {
             Red.showTrace("PlaceholderFragment.onCreateView");
             return rootView;
         }
+    }
+
+    /** Called when the user clicks the Blank button */
+    public void gotoBlank(View view) {
+        Intent intent = new Intent(this, BlankActivity.class);
+        startActivity(intent);
     }
 }
