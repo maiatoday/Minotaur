@@ -1,4 +1,5 @@
 <net.maiatoday.minotaur.red.RedRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,16 +16,16 @@
         android:text="@string/hello_world" />
 
     <net.maiatoday.minotaur.ui.view.LengthPicker
+        android:id="@+id/length_picker_width"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/helloText"
-        android:id="@+id/length_picker_width"/>
+        android:layout_below="@+id/helloText" />
 
     <net.maiatoday.minotaur.ui.view.LengthPicker
+        android:id="@+id/length_picker_height"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/length_picker_width"
-        android:id="@+id/length_picker_height"/>
+        android:layout_below="@+id/length_picker_width" />
 
     <net.maiatoday.minotaur.red.RedImageView
         android:layout_width="wrap_content"
@@ -39,16 +40,34 @@
         android:layout_below="@+id/area_text"
         android:onClick="gotoBlank"
         android:text="@string/goto_blank" />
+
     <TextView
+        android:id="@+id/area_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/area_text"
-        android:layout_below="@id/length_picker_height"/>
+        android:layout_below="@id/length_picker_height" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btn_blank" />
+        android:layout_below="@+id/mini_gauge" />
+
+    <net.maiatoday.minotaur.ui.view.MiniGauge
+        android:id="@+id/mini_gauge"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/btn_blank"
+        android:padding="10dp"
+        app:bg_color="@color/accent" />
+
+    <net.maiatoday.minotaur.ui.view.MiniGauge
+        android:id="@+id/mini_gauge2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/btn_blank"
+        android:padding="10dp"
+        android:layout_toRightOf="@+id/mini_gauge"
+        app:bg_color="@color/primary_dark" />
 
 
 </net.maiatoday.minotaur.red.RedRelativeLayout>
