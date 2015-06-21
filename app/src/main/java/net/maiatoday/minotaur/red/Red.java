@@ -1,4 +1,4 @@
-package net.maiatoday.minotaur;
+package net.maiatoday.minotaur.red;
 
 import android.util.Log;
 

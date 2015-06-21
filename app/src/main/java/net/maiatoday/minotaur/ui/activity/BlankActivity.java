@@ -1,29 +1,26 @@
-package net.maiatoday.minotaur;
+package net.maiatoday.minotaur.ui.activity;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import net.maiatoday.minotaur.R;
 
-public class SettingsActivity extends ActionBarActivity {
+
+public class BlankActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, PreferencesFragment.newInstance())
-                    .commit();
-        }
+        setContentView(R.layout.activity_blank);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_settings, menu);
+        getMenuInflater().inflate(R.menu.menu_blank, menu);
         return true;
     }
 

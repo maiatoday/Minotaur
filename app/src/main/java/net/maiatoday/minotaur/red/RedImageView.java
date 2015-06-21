@@ -1,4 +1,4 @@
-package net.maiatoday.minotaur;
+package net.maiatoday.minotaur.red;
 
 import android.content.Context;
 import android.graphics.Canvas;
