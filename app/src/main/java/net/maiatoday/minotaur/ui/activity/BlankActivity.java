@@ -14,6 +14,8 @@ public class BlankActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blank);
+//        setErrorEnabled(true);
+//        setError(getString(R.string.text_error_message));
     }
 
 
