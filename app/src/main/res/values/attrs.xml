@@ -3,6 +3,8 @@
     <declare-styleable name="MiniGauge">
         <attr name="bg_color" format="color" />
         <attr name="label_color" format="color" />
+        <attr name="text" format="string" />
+
     </declare-styleable>
 
 </resources>

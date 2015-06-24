@@ -3,7 +3,9 @@ package net.maiatoday.minotaur.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +15,10 @@ import android.widget.TextView;
 
 import net.maiatoday.minotaur.R;
 import net.maiatoday.minotaur.red.Red;
+import net.maiatoday.minotaur.ui.view.Gauge;
 import net.maiatoday.minotaur.ui.view.LengthPicker;
+import net.maiatoday.minotaur.ui.view.MiniGauge;
+import net.maiatoday.minotaur.ui.view.SetGauge;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -54,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 gotoBlank(null);
                 break;
         }
-        ;
 
         return super.onOptionsItemSelected(item);
     }
@@ -73,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         private LengthPicker mWidth;
         private LengthPicker mHeight;
         private TextView mArea;
+
+        private SetGauge mBigGauge;
 
         public PlaceholderFragment() {
         }
@@ -98,14 +104,52 @@ public class MainActivity extends AppCompatActivity {
             };
             mWidth.setOnChangeListener(listener);
             mHeight.setOnChangeListener(listener);
+            mBigGauge = (Gauge) rootView.findViewById(R.id.gauge);
 
-            Red.showTrace("PlaceholderFragment.onCreateView");
             return rootView;
         }
 
         private void updateArea() {
             int area = mWidth.getmNumInches()*mHeight.getmNumInches();
             mArea.setText(area + " sq inches");
+        }
+
+
+        public void onRadioButtonClicked(View view) {
+            // Is the button now checked?
+            boolean checked = ((MiniGauge) view).isChecked();
+
+            // Check which radio button was clicked
+            switch(view.getId()) {
+                case R.id.mini_gauge1:
+                    if (checked) {
+                        Log.d("MainFragment", "one clicked");
+                        mBigGauge.setGaugeTitle("Moo");
+                    }
+                        break;
+                case R.id.mini_gauge2:
+                    if (checked) {
+                        mBigGauge.setGaugeTitle("Baa");
+
+                        Log.d("MainFragment", "other clicked");
+                    }
+                        break;
+                case R.id.mini_gauge3:
+                    if (checked) {
+                        mBigGauge.setGaugeTitle("Woof");
+
+                        Log.d("MainFragment", "other clicked");
+                    }
+                    break;
+                case R.id.mini_gauge4:
+                    if (checked) {
+                        mBigGauge.setGaugeTitle("Meouw");
+
+                        Log.d("MainFragment", "other clicked");
+                    }
+                    break;
+            }
+
         }
     }
 
@@ -115,5 +159,11 @@ public class MainActivity extends AppCompatActivity {
     public void gotoBlank(View view) {
         Intent intent = new Intent(this, BlankActivity.class);
         startActivity(intent);
+    }
+
+    public void onRadioButtonClicked(View view) {
+        FragmentManager fm = getSupportFragmentManager();
+        PlaceholderFragment fragment = (PlaceholderFragment) fm.findFragmentById(R.id.container);
+        fragment.onRadioButtonClicked(view);
     }
 }
