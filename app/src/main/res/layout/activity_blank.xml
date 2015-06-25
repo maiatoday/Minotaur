@@ -46,6 +46,25 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <net.maiatoday.minotaur.ui.charting.PieChart
+        android:id="@+id/Pie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/more_layout"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        app:autoCenterPointerInSlice="true"
+        app:highlightStrength="1.12"
+        app:labelColor="@android:color/black"
+        app:labelHeight="20dp"
+        app:labelPosition="left"
+        app:labelWidth="110dp"
+        app:labelY="85dp"
+        app:pieRotation="0"
+        app:pointerRadius="4dp"
+        app:showTextPie="true" />
+
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_normal"
         android:layout_width="wrap_content"
@@ -54,4 +73,5 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_add_white_24dp"
         app:fabSize="normal" />
+
 </RelativeLayout>

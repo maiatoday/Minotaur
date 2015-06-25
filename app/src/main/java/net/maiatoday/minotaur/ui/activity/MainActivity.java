@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             };
             mWidth.setOnChangeListener(listener);
             mHeight.setOnChangeListener(listener);
+
             mBigGauge = (Gauge) rootView.findViewById(R.id.gauge);
 
             return rootView;
