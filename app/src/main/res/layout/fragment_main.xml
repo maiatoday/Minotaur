@@ -154,14 +154,16 @@
             android:layout_alignRight="@+id/gauge"
             android:max="100"/>
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
+        <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/pow"
             android:id="@+id/buttonPow"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/mini_gauges"
-            android:layout_alignEnd="@+id/mini_gauges" />
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_bug_report_white_24dp"
+            app:fabSize="normal"
+            app:borderWidth="0dp" />
 
     </RelativeLayout>

@@ -2,6 +2,7 @@ package net.maiatoday.minotaur.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             mMiniCat.setBigGauge(mBigGauge);
 
             mSeekBar = (SeekBar) rootView.findViewById(R.id.seekBar);
-            Button powButton = (Button) rootView.findViewById(R.id.buttonPow);
+            FloatingActionButton powButton = (FloatingActionButton) rootView.findViewById(R.id.buttonPow);
             powButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
