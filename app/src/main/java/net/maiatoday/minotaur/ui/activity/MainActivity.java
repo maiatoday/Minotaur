@@ -11,14 +11,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.maiatoday.minotaur.R;
 import net.maiatoday.minotaur.red.Red;
-import net.maiatoday.minotaur.ui.view.Gauge;
 import net.maiatoday.minotaur.ui.view.LengthPicker;
 import net.maiatoday.minotaur.ui.view.MiniGauge;
-import net.maiatoday.minotaur.ui.view.SetGauge;
+import net.maiatoday.minotaur.ui.view.OnSetGauge;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -78,7 +80,13 @@ public class MainActivity extends AppCompatActivity {
         private LengthPicker mHeight;
         private TextView mArea;
 
-        private SetGauge mBigGauge;
+        private OnSetGauge mBigGauge;
+        private MiniGauge mMiniCow;
+        private MiniGauge mMiniDog;
+        private MiniGauge mMiniLamb;
+        private MiniGauge mMiniCat;
+        private SeekBar mSeekBar;
+        private RadioGroup mFarmGroup;
 
         public PlaceholderFragment() {
         }
@@ -105,7 +113,27 @@ public class MainActivity extends AppCompatActivity {
             mWidth.setOnChangeListener(listener);
             mHeight.setOnChangeListener(listener);
 
-            mBigGauge = (Gauge) rootView.findViewById(R.id.gauge);
+            mFarmGroup = (RadioGroup) rootView.findViewById(R.id.mini_gauges);
+            mBigGauge = (OnSetGauge) rootView.findViewById(R.id.gauge);
+            mMiniCow = (MiniGauge) rootView.findViewById(R.id.mini_cow);
+            mMiniCow.setBigGauge(mBigGauge);
+            mMiniDog = (MiniGauge) rootView.findViewById(R.id.mini_dog);
+            mMiniDog.setBigGauge(mBigGauge);
+            mMiniLamb = (MiniGauge) rootView.findViewById(R.id.mini_lamb);
+            mMiniLamb.setBigGauge(mBigGauge);
+            mMiniCat = (MiniGauge) rootView.findViewById(R.id.mini_cat);
+            mMiniCat.setBigGauge(mBigGauge);
+
+            mSeekBar = (SeekBar) rootView.findViewById(R.id.seekBar);
+            Button powButton = (Button) rootView.findViewById(R.id.buttonPow);
+            powButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int newNumber = mSeekBar.getProgress();
+                    MiniGauge m = (MiniGauge) mFarmGroup.findViewById(mFarmGroup.getCheckedRadioButtonId());
+                    m.setLastValue(newNumber);
+                }
+            });
 
             return rootView;
         }
@@ -122,31 +150,27 @@ public class MainActivity extends AppCompatActivity {
 
             // Check which radio button was clicked
             switch(view.getId()) {
-                case R.id.mini_gauge1:
+                case R.id.mini_cow:
                     if (checked) {
-                        Log.d("MainFragment", "one clicked");
-                        mBigGauge.setGaugeTitle("Moo");
+                        Log.d("MainFragment", "Moo");
                     }
                         break;
-                case R.id.mini_gauge2:
+                case R.id.mini_lamb:
                     if (checked) {
-                        mBigGauge.setGaugeTitle("Baa");
 
-                        Log.d("MainFragment", "other clicked");
+                        Log.d("MainFragment", "Baa");
                     }
                         break;
-                case R.id.mini_gauge3:
+                case R.id.mini_dog:
                     if (checked) {
-                        mBigGauge.setGaugeTitle("Woof");
 
-                        Log.d("MainFragment", "other clicked");
+                        Log.d("MainFragment", "Woof grrr");
                     }
                     break;
-                case R.id.mini_gauge4:
+                case R.id.mini_cat:
                     if (checked) {
-                        mBigGauge.setGaugeTitle("Meouw");
 
-                        Log.d("MainFragment", "other clicked");
+                        Log.d("MainFragment", "Gsss Meauw");
                     }
                     break;
             }
@@ -166,5 +190,9 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         PlaceholderFragment fragment = (PlaceholderFragment) fm.findFragmentById(R.id.container);
         fragment.onRadioButtonClicked(view);
+
+        if (((MiniGauge) view).isChecked()) {
+            ((MiniGauge) view).updateBigGauge();
+        }
     }
 }

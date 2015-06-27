@@ -39,9 +39,11 @@
             android:id="@+id/btn_blank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/area_text"
             android:onClick="gotoBlank"
-            android:text="@string/goto_blank" />
+            android:text="@string/goto_blank"
+            android:layout_below="@+id/length_picker_width"
+            android:layout_toRightOf="@+id/length_picker_height"
+            android:layout_toEndOf="@+id/length_picker_height" />
 
         <TextView
             android:id="@+id/area_text"
@@ -52,54 +54,79 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/btn_blank"
-            android:layout_toRightOf="@+id/btn_blank" />
+            android:layout_alignTop="@+id/length_picker_width"
+            android:layout_toRightOf="@+id/length_picker_width"
+            android:layout_toEndOf="@+id/length_picker_width" />
 
         <RadioGroup
             android:id="@+id/mini_gauges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_blank"
+            android:layout_below="@+id/area_text"
             android:layout_margin="8dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
-                android:id="@+id/mini_gauge1"
+                android:id="@+id/mini_cow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/mini_gauge_selector"
                 android:checked="true"
                 android:onClick="onRadioButtonClicked"
                 android:padding="8dp"
-                app:text="Moo" />
+                app:mini_title="Moo!"
+                app:mini_subtitle="moomoo"
+                app:message="moomoomoomoo"
+                app:min_value="0"
+                app:max_value="100"
+                app:default_value="20"
+                app:mini_label="M"/>
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
-                android:id="@+id/mini_gauge2"
+                android:id="@+id/mini_lamb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/mini_gauge_selector"
                 android:onClick="onRadioButtonClicked"
                 android:padding="8dp"
-                app:text="Baa" />
+                app:mini_title="Baa!"
+                app:mini_subtitle="booboo"
+                app:message="baabaabaa"
+                app:min_value="0"
+                app:max_value="100"
+                app:default_value="20"
+                app:mini_label="B"/>
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
-                android:id="@+id/mini_gauge3"
+                android:id="@+id/mini_dog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/mini_gauge_selector"
                 android:onClick="onRadioButtonClicked"
                 android:padding="8dp"
-                app:text="Woof" />
+                app:mini_title="Woof!"
+                app:mini_subtitle="waaoo"
+                app:message="waaoowaaoo"
+                app:min_value="0"
+                app:max_value="100"
+                app:default_value="20"
+                app:mini_label="W" />
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
-                android:id="@+id/mini_gauge4"
+                android:id="@+id/mini_cat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/mini_gauge_selector"
                 android:onClick="onRadioButtonClicked"
                 android:padding="8dp"
-                app:text="Meouw" />
+                app:mini_title="Meeau!"
+                app:mini_subtitle="prrr"
+                app:message="gssgssgss"
+                app:min_value="0"
+                app:max_value="100"
+                app:default_value="20"
+                app:mini_label="S"/>
 
         </RadioGroup>
 
@@ -110,9 +137,31 @@
             android:layout_below="@id/mini_gauges"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="8dp"
+            app:gauge_stroke_width_active="16"
+            app:gauge_stroke_width_inactive="8"
+            app:gauge_animate_set="true">
 
             <include layout="@layout/gauge_labels" />
         </net.maiatoday.minotaur.ui.view.Gauge>
+
+        <SeekBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar"
+            android:layout_alignParentBottom="true"
+            android:layout_alignLeft="@+id/gauge"
+            android:layout_alignRight="@+id/gauge"
+            android:max="100"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pow"
+            android:id="@+id/buttonPow"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/mini_gauges"
+            android:layout_alignEnd="@+id/mini_gauges" />
 
     </RelativeLayout>
