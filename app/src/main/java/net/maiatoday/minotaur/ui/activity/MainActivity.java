@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.maiatoday.minotaur.R;
 import net.maiatoday.minotaur.red.Red;
@@ -57,17 +58,31 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 gotoSettings();
                 break;
-            case R.id.action_blank:
-                gotoBlank(null);
+            case R.id.action_plugh:
+                gotoPlugh();
+                break;
+            case R.id.action_xyzzy:
+                gotoTwisty();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void gotoTwisty() {
+
+        Intent intent = new Intent(this, TwistyActivity.class);
+        startActivity(intent);
+    }
+
     private void gotoSettings() {
 
         Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void gotoPlugh() {
+        Intent intent = new Intent(this, PlughActivity.class);
         startActivity(intent);
     }
 
@@ -182,9 +197,9 @@ public class MainActivity extends AppCompatActivity {
      * Called when the user clicks the Blank button
      */
     public void gotoBlank(View view) {
-        Intent intent = new Intent(this, BlankActivity.class);
-        startActivity(intent);
+        Toast.makeText(this, R.string.powToo, Toast.LENGTH_LONG).show();
     }
+
 
     public void onRadioButtonClicked(View view) {
         FragmentManager fm = getSupportFragmentManager();

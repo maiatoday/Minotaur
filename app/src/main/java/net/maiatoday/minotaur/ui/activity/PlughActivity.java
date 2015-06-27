@@ -10,12 +10,12 @@ import net.maiatoday.minotaur.R;
 import net.maiatoday.minotaur.ui.charting.PieChart;
 
 
-public class BlankActivity extends AppCompatActivity {
+public class PlughActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blank);
+        setContentView(R.layout.activity_plugh);
 
         Resources res = getResources();
         final PieChart pie = (PieChart) findViewById(R.id.Pie);
@@ -33,7 +33,7 @@ public class BlankActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_blank, menu);
+        getMenuInflater().inflate(R.menu.menu_plugh, menu);
         return true;
     }
 
