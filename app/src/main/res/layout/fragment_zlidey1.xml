@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="net.maiatoday.minotaur.ui.fragment.ZLidey1Fragment"
-    android:background="#ffbce9">
+    android:background="#ffe0f4">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView android:layout_width="match_parent" android:layout_height="match_parent"
