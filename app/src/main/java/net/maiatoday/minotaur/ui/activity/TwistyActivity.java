@@ -13,7 +13,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -112,18 +111,21 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
                 adapter.addFragment(Xlidey1Fragment.newInstance("XX 2", "zz"), "XX1 2");
                 adapter.addFragment(Xlidey2Fragment.newInstance("XX 3", "zz"), "XX2 3");
                 adapter.addFragment(Xlidey2Fragment.newInstance("XX 3", "zz"), "XX2 3");
+                adapter.addFragment(Xlidey2Fragment.newInstance("XX 3", "zz"), "XX2 3");
+                adapter.addFragment(Xlidey2Fragment.newInstance("XX 3", "zz"), "XX2 3");
+                adapter.addFragment(Xlidey2Fragment.newInstance("XX 3", "zz"), "XX2 3");
                 viewPager.setAdapter(adapter);
                 break;
         }
         //TODO how to remove listener
-        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                Log.d(LOG_TAG, "Page selected position " + position);
-                //TODO set the current room here
-            }
-        });
+//        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                super.onPageSelected(position);
+//                Log.d(LOG_TAG, "Page selected position " + position);
+//                //TODO set the current room here
+//            }
+//        });
     }
 
     @Override
