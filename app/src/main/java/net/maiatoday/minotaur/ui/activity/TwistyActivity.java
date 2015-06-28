@@ -13,6 +13,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +32,7 @@ import java.util.Random;
 public class TwistyActivity extends AppCompatActivity implements OnTwistyInteractionListener{
 
     private static final String KEY_MODE = "key_mode";
+    private static final String LOG_TAG = TwistyActivity.class.getSimpleName();
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
 
@@ -113,6 +115,15 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
                 viewPager.setAdapter(adapter);
                 break;
         }
+        //TODO how to remove listener
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                Log.d(LOG_TAG, "Page selected position " + position);
+                //TODO set the current room here
+            }
+        });
     }
 
     @Override
@@ -133,6 +144,7 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
                 break;
             case R.id.action_delete:
                 MIntentService.startActionBaz(this, "", "");
+                break;
         }
 
         return super.onOptionsItemSelected(item);

@@ -11,7 +11,7 @@ import java.util.Random;
 public class FakeData {
 
     @IntDef({TYPE_CAVE, TYPE_CAVERN, TYPE_PASSAGE})
-    private @interface RoomType {
+    public @interface RoomType {
     }
 
     public static final int TYPE_CAVE = 0;
