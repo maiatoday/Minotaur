@@ -10,6 +10,4 @@ public class FakeData {
     public static String[] roomTypes = {"cave", "cavern", "passage"};
     public static String[] caveNames = {"cave", "cavern", "grotto", "hollow", "chamber", "den", "crypt", "cistern"};
     public static String[] passageNames = {"tunnel", "chimney", "passage", "channel", "hole", "mine", "pit", "shaft", "subway", "burrow", "tube", "crawlspace"};
-
-
 }

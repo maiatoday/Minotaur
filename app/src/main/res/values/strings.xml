@@ -17,5 +17,6 @@
     <string name="title_activity_twisty">Twisty!</string>
     <string name="action_xy">Xy</string>
     <string name="action_zzy">Zzy</string>
+    <string name="action_delete">Delete</string>
 
 </resources>

@@ -19,18 +19,22 @@ import android.view.View;
 import android.widget.Toast;
 
 import net.maiatoday.minotaur.R;
+import net.maiatoday.minotaur.service.MIntentService;
 import net.maiatoday.minotaur.ui.fragment.Xlidey1Fragment;
 import net.maiatoday.minotaur.ui.fragment.Xlidey2Fragment;
 import net.maiatoday.minotaur.ui.fragment.ZLidey1Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TwistyActivity extends AppCompatActivity implements OnTwistyInteractionListener{
 
     private static final String KEY_MODE = "key_mode";
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+
+    Random dice = new Random();
 
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -74,8 +78,12 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+
+                int magicNumber = dice.nextInt(6);
+                Snackbar.make(view, "You rolled a " + magicNumber, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                MIntentService.startActionFoo(TwistyActivity.this, mMode, magicNumber);
+
             }
         });
 
@@ -122,6 +130,8 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
             case R.id.action_mode_toggle:
                 toggleMode(item);
                 break;
+            case R.id.action_delete:
+                MIntentService.startActionBaz(this, "", "");
         }
 
         return super.onOptionsItemSelected(item);
