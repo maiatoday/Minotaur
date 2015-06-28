@@ -37,6 +37,7 @@
 
         <Button
             android:id="@+id/btn_blank"
+            style="@style/Widget.AppCompat.CompoundButton.RadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="gotoBlank"
@@ -69,12 +70,11 @@
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_cow"
+                style="@style/MiniGauge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/mini_gauge_selector"
                 android:checked="true"
                 android:onClick="onRadioButtonClicked"
-                android:padding="8dp"
                 app:mini_title="Moo!"
                 app:mini_subtitle="moomoo"
                 app:message="moomoomoomoo"
@@ -85,11 +85,10 @@
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_lamb"
+                style="@style/MiniGauge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/mini_gauge_selector"
                 android:onClick="onRadioButtonClicked"
-                android:padding="8dp"
                 app:mini_title="Baa!"
                 app:mini_subtitle="booboo"
                 app:message="baabaabaa"
@@ -102,9 +101,8 @@
                 android:id="@+id/mini_dog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/mini_gauge_selector"
                 android:onClick="onRadioButtonClicked"
-                android:padding="8dp"
+                style="@style/MiniGauge"
                 app:mini_title="Woof!"
                 app:mini_subtitle="waaoo"
                 app:message="waaoowaaoo"
@@ -115,11 +113,10 @@
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_cat"
+                style="@style/MiniGauge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:button="@drawable/mini_gauge_selector"
                 android:onClick="onRadioButtonClicked"
-                android:padding="8dp"
                 app:mini_title="Meeau!"
                 app:mini_subtitle="prrr"
                 app:message="gssgssgss"

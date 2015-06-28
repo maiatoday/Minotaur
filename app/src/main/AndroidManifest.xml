@@ -19,7 +19,7 @@
         <activity
             android:name=".ui.activity.PlughActivity"
             android:label="@string/title_activity_plugh"
-            android:parentActivityName=".ui.activity.MainActivity">
+            android:parentActivityName=".ui.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />
@@ -27,20 +27,30 @@
         <activity
             android:name=".ui.activity.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".ui.activity.MainActivity">
+            android:parentActivityName=".ui.activity.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />
         </activity>
         <activity
             android:name=".ui.activity.TwistyActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_twisty"
-            android:parentActivityName=".ui.activity.MainActivity">
+            android:parentActivityName=".ui.activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.MainActivity" />
         </activity>
+
+        <provider
+            android:name=".provider.MProvider"
+            android:authorities="net.maiatoday.minotaur.provider"
+            android:exported="false" />
+
+        <service
+            android:name=".service.MIntentService"
+            android:exported="false" >
+        </service>
     </application>
 
 </manifest>
