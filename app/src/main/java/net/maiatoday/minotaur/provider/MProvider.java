@@ -42,22 +42,34 @@ public class MProvider extends ContentProvider {
     // When a incoming URI is run through sUriMatcher, it will be tested against the defined
     // URI patterns, and the corresponding route ID will be returned.
     /**
-     * URI ID for route: /entries
+     * URI ID for route: /room
      */
-    public static final int ROUTE_ENTRIES = 1;
+    public static final int ROUTE_ROOM = 1;
 
     /**
-     * URI ID for route: /entries/{ID}
+     * URI ID for route: /room/{ID}
      */
-    public static final int ROUTE_ENTRIES_ID = 2;
+    public static final int ROUTE_ROOM_ID = 2;
+    /**
+     * URI ID for route: /loot
+     */
+    public static final int ROUTE_LOOT = 3;
+
+    /**
+     * URI ID for route: /loot/{ID}
+     */
+    public static final int ROUTE_LOOT_ID = 4;
 
     /**
      * UriMatcher, used to decode incoming URIs.
      */
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+
     static {
-        sUriMatcher.addURI(AUTHORITY, "entries", ROUTE_ENTRIES);
-        sUriMatcher.addURI(AUTHORITY, "entries/*", ROUTE_ENTRIES_ID);
+        sUriMatcher.addURI(AUTHORITY, MContract.Room.PATH, ROUTE_ROOM);
+        sUriMatcher.addURI(AUTHORITY, MContract.Room.PATH + "/*", ROUTE_ROOM_ID);
+        sUriMatcher.addURI(AUTHORITY, MContract.Loot.PATH, ROUTE_LOOT);
+        sUriMatcher.addURI(AUTHORITY, MContract.Loot.PATH + "/*", ROUTE_LOOT_ID);
     }
 
     @Override
@@ -73,10 +85,14 @@ public class MProvider extends ContentProvider {
     public String getType(Uri uri) {
         final int match = sUriMatcher.match(uri);
         switch (match) {
-            case ROUTE_ENTRIES:
-                return MContract.Entry.CONTENT_TYPE;
-            case ROUTE_ENTRIES_ID:
-                return MContract.Entry.CONTENT_ITEM_TYPE;
+            case ROUTE_ROOM:
+                return MContract.Room.CONTENT_TYPE;
+            case ROUTE_ROOM_ID:
+                return MContract.Room.CONTENT_ITEM_TYPE;
+            case ROUTE_LOOT:
+                return MContract.Loot.CONTENT_TYPE;
+            case ROUTE_LOOT_ID:
+                return MContract.Loot.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -84,7 +100,7 @@ public class MProvider extends ContentProvider {
 
     /**
      * Perform a database query by URI.
-     *
+     * <p/>
      * <p>Currently supports returning all entries (/entries) and individual entries by ID
      * (/entries/{ID}).
      */
@@ -95,14 +111,14 @@ public class MProvider extends ContentProvider {
         SelectionBuilder builder = new SelectionBuilder();
         int uriMatch = sUriMatcher.match(uri);
         switch (uriMatch) {
-            case ROUTE_ENTRIES_ID:
-                // Return a single entry, by ID.
+            case ROUTE_ROOM_ID:
+                // Return a single Room, by ID.
                 String id = uri.getLastPathSegment();
-                builder.where(MContract.Entry._ID + "=?", id);
-            case ROUTE_ENTRIES:
+                builder.where(MContract.Room._ID + "=?", id);
+            case ROUTE_ROOM:
                 // Return all known entries.
-                builder.table(MContract.Entry.TABLE_NAME)
-                       .where(selection, selectionArgs);
+                builder.table(MContract.Room.TABLE_NAME)
+                        .where(selection, selectionArgs);
                 Cursor c = builder.query(db, projection, sortOrder);
                 // Note: Notification URI must be manually set here for loaders to correctly
                 // register ContentObservers.
@@ -116,7 +132,7 @@ public class MProvider extends ContentProvider {
     }
 
     /**
-     * Insert a new entry into the database.
+     * Insert a new Room into the database.
      */
     @Override
     public Uri insert(Uri uri, ContentValues values) {
@@ -125,11 +141,20 @@ public class MProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         Uri result;
         switch (match) {
-            case ROUTE_ENTRIES:
-                long id = db.insertOrThrow(MContract.Entry.TABLE_NAME, null, values);
-                result = Uri.parse(MContract.Entry.CONTENT_URI + "/" + id);
-                break;
-            case ROUTE_ENTRIES_ID:
+            case ROUTE_ROOM: {
+                long id = db.insertOrThrow(MContract.Room.TABLE_NAME, null, values);
+                result = Uri.parse(MContract.Room.CONTENT_URI + "/" + id);
+            }
+            break;
+            case ROUTE_ROOM_ID:
+                throw new UnsupportedOperationException("Insert not supported on URI: " + uri);
+
+            case ROUTE_LOOT: {
+                long id = db.insertOrThrow(MContract.Loot.TABLE_NAME, null, values);
+                result = Uri.parse(MContract.Loot.CONTENT_URI + "/" + id);
+            }
+            break;
+            case ROUTE_LOOT_ID:
                 throw new UnsupportedOperationException("Insert not supported on URI: " + uri);
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -142,7 +167,7 @@ public class MProvider extends ContentProvider {
     }
 
     /**
-     * Delete an entry by database by URI.
+     * Delete an Room by database by URI.
      */
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
@@ -151,18 +176,32 @@ public class MProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         int count;
         switch (match) {
-            case ROUTE_ENTRIES:
-                count = builder.table(MContract.Entry.TABLE_NAME)
+            case ROUTE_ROOM:
+                count = builder.table(MContract.Room.TABLE_NAME)
                         .where(selection, selectionArgs)
                         .delete(db);
                 break;
-            case ROUTE_ENTRIES_ID:
+            case ROUTE_ROOM_ID: {
                 String id = uri.getLastPathSegment();
-                count = builder.table(MContract.Entry.TABLE_NAME)
-                       .where(MContract.Entry._ID + "=?", id)
-                       .where(selection, selectionArgs)
-                       .delete(db);
+                count = builder.table(MContract.Room.TABLE_NAME)
+                        .where(MContract.Room._ID + "=?", id)
+                        .where(selection, selectionArgs)
+                        .delete(db);
+            }
+            break;
+            case ROUTE_LOOT:
+                count = builder.table(MContract.Loot.TABLE_NAME)
+                        .where(selection, selectionArgs)
+                        .delete(db);
                 break;
+            case ROUTE_LOOT_ID: {
+                String id = uri.getLastPathSegment();
+                count = builder.table(MContract.Loot.TABLE_NAME)
+                        .where(MContract.Loot._ID + "=?", id)
+                        .where(selection, selectionArgs)
+                        .delete(db);
+            }
+            break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -174,7 +213,7 @@ public class MProvider extends ContentProvider {
     }
 
     /**
-     * Update an entry in the database by URI.
+     * Update an Room in the database by URI.
      */
     @Override
     public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
@@ -183,18 +222,33 @@ public class MProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         int count;
         switch (match) {
-            case ROUTE_ENTRIES:
-                count = builder.table(MContract.Entry.TABLE_NAME)
+            case ROUTE_ROOM:
+                count = builder.table(MContract.Room.TABLE_NAME)
                         .where(selection, selectionArgs)
                         .update(db, values);
                 break;
-            case ROUTE_ENTRIES_ID:
+            case ROUTE_ROOM_ID: {
                 String id = uri.getLastPathSegment();
-                count = builder.table(MContract.Entry.TABLE_NAME)
-                        .where(MContract.Entry._ID + "=?", id)
+                count = builder.table(MContract.Room.TABLE_NAME)
+                        .where(MContract.Room._ID + "=?", id)
+                        .where(selection, selectionArgs)
+                        .update(db, values);
+            }
+            break;
+
+            case ROUTE_LOOT:
+                count = builder.table(MContract.Loot.TABLE_NAME)
                         .where(selection, selectionArgs)
                         .update(db, values);
                 break;
+            case ROUTE_LOOT_ID: {
+                String id = uri.getLastPathSegment();
+                count = builder.table(MContract.Loot.TABLE_NAME)
+                        .where(MContract.Loot._ID + "=?", id)
+                        .where(selection, selectionArgs)
+                        .update(db, values);
+            }
+            break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -206,31 +260,56 @@ public class MProvider extends ContentProvider {
 
     /**
      * SQLite backend for @{link MProvider}.
-     *
+     * <p/>
      * Provides access to an disk-backed, SQLite datastore which is utilized by MProvider. This
      * database should never be accessed by other parts of the application directly.
      */
     static class Database extends SQLiteOpenHelper {
-        /** Schema version. */
+        /**
+         * Schema version.
+         */
         public static final int DATABASE_VERSION = 1;
-        /** Filename for SQLite file. */
+        /**
+         * Filename for SQLite file.
+         */
         public static final String DATABASE_NAME = "minotaur.db";
 
         private static final String TYPE_TEXT = " TEXT";
         private static final String TYPE_INTEGER = " INTEGER";
         private static final String COMMA_SEP = ",";
-        /** SQL statement to create "entry" table. */
-        private static final String SQL_CREATE_ENTRIES =
-                "CREATE TABLE " + MContract.Entry.TABLE_NAME + " (" +
-                        MContract.Entry._ID + " INTEGER PRIMARY KEY," +
-                        MContract.Entry.COLUMN_NAME_ENTRY_ID + TYPE_TEXT + COMMA_SEP +
-                        MContract.Entry.COLUMN_NAME_TITLE    + TYPE_TEXT + COMMA_SEP +
-                        MContract.Entry.COLUMN_NAME_LINK + TYPE_TEXT + COMMA_SEP +
-                        MContract.Entry.COLUMN_NAME_PUBLISHED + TYPE_INTEGER + ")";
+        private static final String NOT_NULL = " NOT NULL";
 
-        /** SQL statement to drop "entry" table. */
-        private static final String SQL_DELETE_ENTRIES =
-                "DROP TABLE IF EXISTS " + MContract.Entry.TABLE_NAME;
+        /**
+         * SQL statement to create "Room" table.
+         */
+        private static final String SQL_CREATE_ROOM =
+                "CREATE TABLE " + MContract.Room.TABLE_NAME + " (" +
+                        MContract.Room._ID + " INTEGER PRIMARY KEY," +
+                        MContract.Room.COLUMN_TYPE + TYPE_INTEGER + COMMA_SEP +
+                        MContract.Room.COLUMN_NAME + TYPE_TEXT + ")";
+        /**
+         * SQL statement to drop "Room" table.
+         */
+        private static final String SQL_DELETE_ROOM =
+                "DROP TABLE IF EXISTS " + MContract.Room.TABLE_NAME;
+
+        /**
+         * SQL statement to create "Loot" table.
+         */
+        private static final String SQL_CREATE_LOOT =
+                "CREATE TABLE " + MContract.Loot.TABLE_NAME + " (" +
+                        MContract.Loot._ID + " INTEGER PRIMARY KEY," +
+                        MContract.Loot.COLUMN_ROOM_ID + TYPE_INTEGER + NOT_NULL + COMMA_SEP +
+                        MContract.Loot.COLUMN_IS_HERRING + TYPE_INTEGER + COMMA_SEP +
+                        MContract.Loot.COLUMN_VALUE + TYPE_INTEGER + COMMA_SEP +
+                        MContract.Loot.COLUMN_NAME + TYPE_TEXT + ")";
+//                        " FOREIGN KEY (" + MContract.Loot.COLUMN_ROOM_ID + ") REFERENCES " +
+//                        MContract.Room.TABLE_NAME + " (" + MContract.Room._ID + ") " + ")";
+        /**
+         * SQL statement to drop "Loot" table.
+         */
+        private static final String SQL_DELETE_LOOT =
+                "DROP TABLE IF EXISTS " + MContract.Loot.TABLE_NAME;
 
         public Database(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -238,14 +317,16 @@ public class MProvider extends ContentProvider {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(SQL_CREATE_ENTRIES);
+            db.execSQL(SQL_CREATE_ROOM);
+            db.execSQL(SQL_CREATE_LOOT);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // This database is only a cache for online data, so its upgrade policy is
             // to simply to discard the data and start over
-            db.execSQL(SQL_DELETE_ENTRIES);
+            db.execSQL(SQL_DELETE_ROOM);
+            db.execSQL(SQL_DELETE_LOOT);
             onCreate(db);
         }
     }

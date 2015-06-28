@@ -34,56 +34,60 @@ public class MContract {
     public static final String CONTENT_AUTHORITY = "net.maiatoday.minotaur.provider";
 
     /**
-     * Base URI. (content://com.example.android.basicsyncadapter)
+     * Base URI.
      */
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
     /**
-     * Path component for "entry"-type resources..
+     * Columns supported by "room" records.
      */
-    private static final String PATH_ENTRIES = "entries";
+    public static class Room implements BaseColumns {
 
-    /**
-     * Columns supported by "entries" records.
-     */
-    public static class Entry implements BaseColumns {
-        /**
-         * MIME type for lists of entries.
-         */
-        public static final String CONTENT_TYPE =
-                ContentResolver.CURSOR_DIR_BASE_TYPE + "/vnd.basicsyncadapter.entries";
-        /**
-         * MIME type for individual entries.
-         */
-        public static final String CONTENT_ITEM_TYPE =
-                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/vnd.basicsyncadapter.entry";
 
-        /**
-         * Fully qualified URI for "entry" resources.
-         */
+        public static final String PATH = "room";
+
         public static final Uri CONTENT_URI =
-                BASE_CONTENT_URI.buildUpon().appendPath(PATH_ENTRIES).build();
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
 
         /**
          * Table name where records are stored for "entry" resources.
          */
-        public static final String TABLE_NAME = "entry";
+        public static final String TABLE_NAME = PATH;
+
+        public static final String COLUMN_TYPE = "type";
+        public static final String COLUMN_NAME = "name";
+    }
+
+    /**
+     * Columns supported by "rooms" records.
+     */
+    public static class Loot implements BaseColumns {
+
+
+        public static final String PATH = "loot";
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH).build();
+
+        public static final String CONTENT_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH;
+
         /**
-         * Atom ID. (Note: Not to be confused with the database primary key, which is _ID.
+         * Table name where records are stored for "loot" resources.
          */
-        public static final String COLUMN_NAME_ENTRY_ID = "entry_id";
-        /**
-         * Article title
-         */
-        public static final String COLUMN_NAME_TITLE = "title";
-        /**
-         * Article hyperlink. Corresponds to the rel="alternate" link in the
-         * Atom spec.
-         */
-        public static final String COLUMN_NAME_LINK = "link";
-        /**
-         * Date article was published.
-         */
-        public static final String COLUMN_NAME_PUBLISHED = "published";
+        public static final String TABLE_NAME = PATH;
+
+        /// Foreign key to indicate which room contains the loot item
+        public static final String COLUMN_ROOM_ID = "room_id";
+        public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_VALUE = "value";
+        public static final String COLUMN_IS_HERRING = "isHerring";
     }
 }

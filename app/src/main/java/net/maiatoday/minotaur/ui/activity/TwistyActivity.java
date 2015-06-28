@@ -35,6 +35,7 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
     private TabLayout mTabLayout;
 
     Random dice = new Random();
+    private int mCurrentRoom;
 
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -82,7 +83,7 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
                 int magicNumber = dice.nextInt(6);
                 Snackbar.make(view, "You rolled a " + magicNumber, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                MIntentService.startActionFoo(TwistyActivity.this, mMode, magicNumber);
+                MIntentService.startActionFoo(TwistyActivity.this, mMode, magicNumber, mCurrentRoom);
 
             }
         });
