@@ -321,9 +321,9 @@ public class MProvider extends ContentProvider {
                         MContract.Loot.COLUMN_ROOM_ID + TYPE_INTEGER + NOT_NULL + COMMA_SEP +
                         MContract.Loot.COLUMN_IS_HERRING + TYPE_INTEGER + COMMA_SEP +
                         MContract.Loot.COLUMN_VALUE + TYPE_INTEGER + COMMA_SEP +
-                        MContract.Loot.COLUMN_NAME + TYPE_TEXT + ")";
-//                        " FOREIGN KEY (" + MContract.Loot.COLUMN_ROOM_ID + ") REFERENCES " +
-//                        MContract.Room.TABLE_NAME + " (" + MContract.Room._ID + ") " + ")";
+                        MContract.Loot.COLUMN_NAME + TYPE_TEXT +
+                        " FOREIGN KEY (" + MContract.Loot.COLUMN_ROOM_ID + ") REFERENCES " +
+                        MContract.Room.TABLE_NAME  + ")";
         /**
          * SQL statement to drop "Loot" table.
          */

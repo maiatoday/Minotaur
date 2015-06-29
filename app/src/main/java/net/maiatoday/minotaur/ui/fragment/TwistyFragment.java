@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SimpleCursorAdapter;
 
 import net.maiatoday.minotaur.R;
 import net.maiatoday.minotaur.provider.MContract;
@@ -27,6 +28,8 @@ public class TwistyFragment extends Fragment {
     protected String mName;
 
     protected OnTwistyInteractionListener mListener;
+
+    protected SimpleCursorAdapter mAdapter;
 
     protected static final int LOADER_ID = 10;
     protected static final String KEY_ROOM_ID = "room_id";
@@ -71,6 +74,10 @@ public class TwistyFragment extends Fragment {
             mId = getArguments().getInt(ARG_ID, 0);
             mName = getArguments().getString(ARG_NAME);
         }
+        mAdapter = new SimpleCursorAdapter(getActivity(),
+                android.R.layout.simple_list_item_2, null,
+                new String[] { MContract.Loot.COLUMN_NAME, MContract.Loot.COLUMN_VALUE },
+                new int[] { android.R.id.text1, android.R.id.text2 }, 0);
     }
 
     @Override

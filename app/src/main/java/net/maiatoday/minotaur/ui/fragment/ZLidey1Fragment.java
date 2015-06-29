@@ -5,13 +5,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import net.maiatoday.minotaur.R;
+import net.maiatoday.minotaur.provider.MContract;
 import net.maiatoday.minotaur.ui.activity.OnTwistyInteractionListener;
 
 /**
@@ -62,6 +65,8 @@ public class ZLidey1Fragment extends TwistyFragment implements LoaderManager.Loa
         View view = inflater.inflate(R.layout.fragment_zlidey1, container, false);
         TextView name = (TextView) view.findViewById(R.id.textName);
         name.setText(mName + " " + mId);
+        ListView list = (ListView) view.findViewById(R.id.listview);
+        list.setAdapter(mAdapter);
         return  view;
     }
 
@@ -74,16 +79,27 @@ public class ZLidey1Fragment extends TwistyFragment implements LoaderManager.Loa
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return null;
+
+        return new CursorLoader(
+                getActivity(),   // Parent activity context
+                MContract.Loot.CONTENT_URI,        // Table to query
+                PROJECTION,     // Projection to return
+                MContract.Loot.COLUMN_ROOM_ID + " =?",
+                new String[] {String.valueOf(args.getInt(KEY_ROOM_ID))},            // No selection arguments
+                null             // Default sort order
+        );
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mAdapter.swapCursor(data);
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+
+        mAdapter.swapCursor(null);
 
     }
 }
