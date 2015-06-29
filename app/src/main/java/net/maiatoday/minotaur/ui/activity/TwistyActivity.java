@@ -282,6 +282,19 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
         }
 
         @Override
+        public CharSequence getPageTitle(int position) {
+            String title = "";
+            if (mDataValid) {
+                int columnIndex = mCursor.getColumnIndex(MContract.Room.COLUMN_NAME);
+                if ((columnIndex > -1) && (mCursor.moveToPosition(position))) {
+                    return mCursor.getString(columnIndex);
+                }
+
+            }
+            return super.getPageTitle(position);
+        }
+
+        @Override
         public Fragment getItem(Context context, Cursor cursor) {
             int roomType = cursor.getInt(cursor.getColumnIndex(MContract.Room.COLUMN_TYPE));
             int id = cursor.getInt(cursor.getColumnIndex(MContract.Room._ID));

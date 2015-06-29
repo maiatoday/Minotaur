@@ -1,12 +1,12 @@
 package net.maiatoday.minotaur.ui.fragment;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.maiatoday.minotaur.R;
 import net.maiatoday.minotaur.ui.activity.OnTwistyInteractionListener;
@@ -19,15 +19,7 @@ import net.maiatoday.minotaur.ui.activity.OnTwistyInteractionListener;
  * Use the {@link Xlidey2Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Xlidey2Fragment extends Fragment {
-    private static final String ARG_ID = "id";
-    private static final String ARG_NAME = "name";
-
-    private int mId;
-    private String mName;
-
-    private OnTwistyInteractionListener mListener;
-
+public class Xlidey2Fragment  extends TwistyFragment {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -51,19 +43,13 @@ public class Xlidey2Fragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mId = getArguments().getInt(ARG_ID, 0);
-            mName = getArguments().getString(ARG_NAME);
-        }
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_xlidey2, container, false);
+        View view = inflater.inflate(R.layout.fragment_xlidey2, container, false);
+        TextView name = (TextView) view.findViewById(R.id.textName);
+        name.setText(mName + " " + mId);
+        return  view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -72,23 +58,4 @@ public class Xlidey2Fragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnTwistyInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
 }

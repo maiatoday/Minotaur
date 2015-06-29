@@ -1,19 +1,33 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.maiatoday.minotaur.ui.fragment.ZLidey1Fragment"
-    android:background="#ffe0f4">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    android:orientation="vertical"
+    tools:context="net.maiatoday.minotaur.ui.fragment.Zlidey1Fragment">
 
     <TextView
+        android:id="@+id/textLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Much Zlidey"
-        android:id="@+id/textView"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:text="Passage"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        tools:text="Zlidey Mark 1" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+
+</LinearLayout>
+

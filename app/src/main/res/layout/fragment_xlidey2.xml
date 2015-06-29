@@ -1,24 +1,33 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="net.maiatoday.minotaur.ui.fragment.Xlidey2Fragment">
 
-
-
     <TextView
+        android:id="@+id/textCave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Xlidey "
-        android:id="@+id/textView3"
-        android:layout_gravity="center_horizontal|top" />
+        android:layout_gravity="center"
+        android:text="Cavern"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
+        android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Mark Too"
-        android:id="@+id/textView4"
-        android:layout_gravity="center" />
+        tools:text="Xlidey Mark 2" />
 
-</FrameLayout>
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+
+</LinearLayout>
+
