@@ -18,9 +18,9 @@ public class FakeData {
     public static final int TYPE_CAVERN = 1;
     public static final int TYPE_PASSAGE = 2;
 
-    public static final String[] HERRING = {"herring", "wooden spoon", "damp rag", "dustbunny", "dog hair"};
-    public static final String[] TREASURE = {"gold coin", "brass ring", "RAM upgrade", "steaming cappuccino", "SD card with music", "battery pack"};
-    public static final String[] ADJECTIVES = {"damp", "luminescent", "vaulted", "dusty", "warm", "humid", "dry", "slippery"};
+    public static final String[] HERRING = {"herring", "wooden spoon", "damp rag", "dustbunny", "dog hair", "toothpick", "faded credit card slip"};
+    public static final String[] TREASURE = {"gold coin", "brass ring", "RAM upgrade", "steaming cappuccino", "SD card with music", "battery pack", "gummy worm", "churros and caramel"};
+    public static final String[] ADJECTIVES = {"damp", "luminescent", "vaulted", "dusty", "warm", "humid", "dry", "slippery", "crepuscular", "shadowy", "magical"};
     public static final String[] CAVE_NAME = {"cave", "cavern", "grotto", "hollow", "chamber", "den", "crypt", "cistern"};
     public static final String[] PASSAGE_NAME = {"tunnel", "chimney", "passage", "channel", "hole", "mine", "pit", "shaft", "subway", "burrow", "tube", "crawlspace"};
 
