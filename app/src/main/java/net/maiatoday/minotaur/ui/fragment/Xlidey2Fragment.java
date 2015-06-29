@@ -1,8 +1,11 @@
 package net.maiatoday.minotaur.ui.fragment;
 
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +22,7 @@ import net.maiatoday.minotaur.ui.activity.OnTwistyInteractionListener;
  * Use the {@link Xlidey2Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Xlidey2Fragment  extends TwistyFragment {
+public class Xlidey2Fragment  extends TwistyFragment implements LoaderManager.LoaderCallbacks<Cursor> {
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -28,7 +31,6 @@ public class Xlidey2Fragment  extends TwistyFragment {
      * @param name Parameter 2.
      * @return A new instance of fragment Xlidey2Fragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static Xlidey2Fragment newInstance(int id, String name) {
         Xlidey2Fragment fragment = new Xlidey2Fragment();
         Bundle args = new Bundle();
@@ -40,6 +42,14 @@ public class Xlidey2Fragment  extends TwistyFragment {
 
     public Xlidey2Fragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_ROOM_ID, mId);
+        getLoaderManager().initLoader(LOADER_ID, bundle, this);
     }
 
     @Override
@@ -57,5 +67,20 @@ public class Xlidey2Fragment  extends TwistyFragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }

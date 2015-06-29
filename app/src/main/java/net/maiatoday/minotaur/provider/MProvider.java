@@ -111,11 +111,12 @@ public class MProvider extends ContentProvider {
         SelectionBuilder builder = new SelectionBuilder();
         int uriMatch = sUriMatcher.match(uri);
         switch (uriMatch) {
-            case ROUTE_ROOM_ID:
+            case ROUTE_ROOM_ID: {
                 // Return a single Room, by ID.
                 String id = uri.getLastPathSegment();
                 builder.where(MContract.Room._ID + "=?", id);
-            case ROUTE_ROOM:
+            }
+            case ROUTE_ROOM: {
                 // Return all known entries.
                 builder.table(MContract.Room.TABLE_NAME)
                         .where(selection, selectionArgs);
@@ -126,6 +127,24 @@ public class MProvider extends ContentProvider {
                 assert ctx != null;
                 c.setNotificationUri(ctx.getContentResolver(), uri);
                 return c;
+            }
+            case ROUTE_LOOT_ID: {
+                // Return a single Room, by ID.
+                String id = uri.getLastPathSegment();
+                builder.where(MContract.Loot._ID + "=?", id);
+            }
+            case ROUTE_LOOT: {
+                // Return all known entries.
+                builder.table(MContract.Loot.TABLE_NAME)
+                        .where(selection, selectionArgs);
+                Cursor c = builder.query(db, projection, sortOrder);
+                // Note: Notification URI must be manually set here for loaders to correctly
+                // register ContentObservers.
+                Context ctx = getContext();
+                assert ctx != null;
+                c.setNotificationUri(ctx.getContentResolver(), uri);
+                return c;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }

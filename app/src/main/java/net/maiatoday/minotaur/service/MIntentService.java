@@ -80,17 +80,22 @@ public class MIntentService extends IntentService {
      * parameters. For the example I'll make this one a roll the dice and insert into the db action.
      */
     private void handleActionFoo(int mode, int magicNumber, int currentRoom) {
-        if (magicNumber%2 == 0) {
-            addLoot(currentRoom);
-        } else {
-            addHerring(currentRoom);
-        }
-        if (magicNumber == 2) {
-            addCave();
-        } else if (magicNumber == 5) {
+        if (currentRoom <= 0) {
             addCavern();
-        } else if (magicNumber == 4) {
             addPassage();
+        } else {
+            if (magicNumber % 2 == 0) {
+                addLoot(currentRoom);
+            } else {
+                addHerring(currentRoom);
+            }
+            if (magicNumber == 2) {
+                addCave();
+            } else if (magicNumber == 5) {
+                addCavern();
+            } else if (magicNumber == 4) {
+                addPassage();
+            }
         }
         Log.d(LOG_TAG, "do some random db changes: magicNumber" +magicNumber);
     }

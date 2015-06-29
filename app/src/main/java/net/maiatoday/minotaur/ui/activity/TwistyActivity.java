@@ -28,6 +28,7 @@ import net.maiatoday.minotaur.R;
 import net.maiatoday.minotaur.odd.CursorFragmentStatePagerAdapter;
 import net.maiatoday.minotaur.provider.MContract;
 import net.maiatoday.minotaur.service.MIntentService;
+import net.maiatoday.minotaur.ui.fragment.TwistyFragment;
 import net.maiatoday.minotaur.ui.fragment.Xlidey1Fragment;
 import net.maiatoday.minotaur.ui.fragment.Xlidey2Fragment;
 import net.maiatoday.minotaur.ui.fragment.ZLidey1Fragment;
@@ -48,7 +49,6 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
     private CursorFragmentStatePagerAdapter mAdapter;
 
     Random dice = new Random();
-    private int mCurrentRoom;
 
     /**
      * Projection for querying the content provider.
@@ -100,7 +100,8 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
                 int magicNumber = dice.nextInt(6);
                 Snackbar.make(view, "You rolled a " + magicNumber, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                MIntentService.startActionFoo(TwistyActivity.this, mMode, magicNumber, mCurrentRoom);
+                int currentRoom = getRoomId();
+                MIntentService.startActionFoo(TwistyActivity.this, mMode, magicNumber, currentRoom);
 
             }
         });
@@ -117,6 +118,21 @@ public class TwistyActivity extends AppCompatActivity implements OnTwistyInterac
             }
         });
         initLoader();
+    }
+
+    private int getRoomId() {
+        int count = mAdapter.getCount();
+        if (count > 0) {
+            int i = mViewPager.getCurrentItem();
+            TwistyFragment tf = (TwistyFragment) mAdapter.getItem(i);
+            if (tf != null) {
+                return tf.getRoomId();
+            } else {
+                return -1;
+            }
+        } else {
+            return -1;
+        }
     }
 
     private void initLoader() {

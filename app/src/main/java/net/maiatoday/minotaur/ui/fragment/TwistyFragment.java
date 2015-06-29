@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.maiatoday.minotaur.R;
+import net.maiatoday.minotaur.provider.MContract;
 import net.maiatoday.minotaur.ui.activity.OnTwistyInteractionListener;
 
 /**
@@ -27,6 +28,16 @@ public class TwistyFragment extends Fragment {
 
     protected OnTwistyInteractionListener mListener;
 
+    protected static final int LOADER_ID = 10;
+    protected static final String KEY_ROOM_ID = "room_id";
+    protected static final String[] PROJECTION = new String[]{
+            MContract.Loot._ID,
+            MContract.Loot.COLUMN_NAME,
+            MContract.Loot.COLUMN_VALUE,
+            MContract.Loot.COLUMN_IS_HERRING
+    };
+
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -43,6 +54,10 @@ public class TwistyFragment extends Fragment {
         args.putString(ARG_NAME, name);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public int getRoomId() {
+        return getArguments().getInt(ARG_ID, 0);
     }
 
     public TwistyFragment() {

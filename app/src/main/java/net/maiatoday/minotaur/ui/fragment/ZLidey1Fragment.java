@@ -1,8 +1,11 @@
 package net.maiatoday.minotaur.ui.fragment;
 
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +22,7 @@ import net.maiatoday.minotaur.ui.activity.OnTwistyInteractionListener;
  * Use the {@link ZLidey1Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ZLidey1Fragment extends TwistyFragment {
+public class ZLidey1Fragment extends TwistyFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     /**
      * Use this factory method to create a new instance of
@@ -43,6 +46,14 @@ public class ZLidey1Fragment extends TwistyFragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = new Bundle();
+        bundle.putInt(KEY_ROOM_ID, mId);
+        getLoaderManager().initLoader(LOADER_ID, bundle, this);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,4 +72,18 @@ public class ZLidey1Fragment extends TwistyFragment {
         }
     }
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
+    }
 }
