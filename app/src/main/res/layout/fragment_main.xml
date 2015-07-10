@@ -34,6 +34,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:src="@drawable/ic_launcher" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_alignParentRight="true"
+            android:background="#ffbce9"
+            android:text="xxxx"/>
+        <!--@drawable/mini_gauge_selector-->
 
         <Button
             android:id="@+id/btn_blank"
@@ -64,15 +72,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/area_text"
-            android:layout_margin="8dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="#7acdff">
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_cow"
                 style="@style/MiniGauge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:checked="true"
                 android:onClick="onRadioButtonClicked"
                 app:mini_title="Moo!"
@@ -86,8 +92,6 @@
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_lamb"
                 style="@style/MiniGauge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:onClick="onRadioButtonClicked"
                 app:mini_title="Baa!"
                 app:mini_subtitle="booboo"
@@ -99,8 +103,6 @@
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_dog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:onClick="onRadioButtonClicked"
                 style="@style/MiniGauge"
                 app:mini_title="Woof!"
@@ -114,8 +116,6 @@
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_cat"
                 style="@style/MiniGauge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:onClick="onRadioButtonClicked"
                 app:mini_title="Meeau!"
                 app:mini_subtitle="prrr"
@@ -124,6 +124,7 @@
                 app:max_value="100"
                 app:default_value="20"
                 app:mini_label="S"/>
+
 
         </RadioGroup>
 
