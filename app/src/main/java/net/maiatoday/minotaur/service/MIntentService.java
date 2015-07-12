@@ -89,11 +89,8 @@ public class MIntentService extends IntentService {
             } else {
                 addHerring(currentRoom);
             }
-            if (magicNumber == 2) {
+            if (magicNumber == 5) {
                 addCave();
-            } else if (magicNumber == 5) {
-                addCavern();
-            } else if (magicNumber == 4) {
                 addPassage();
             }
         }
