@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
@@ -276,5 +278,51 @@ public class Gauge extends LinearLayout implements OnSetGauge {
      */
     public static float  easeInOut(float time, float beginning , float change, float duration) {
         return -change/2 * ((float)Math.cos(Math.PI*time/duration) - 1) + beginning;
+    }
+
+
+    @NonNull
+    @Override
+    public Parcelable onSaveInstanceState() {
+        final Parcelable superState = super.onSaveInstanceState();
+        final SavedState ss = new SavedState(superState);
+        ss.mCurrentArcAngle = mCurrentArcAngle;
+        return ss;
+    }
+
+    @Override
+    public void onRestoreInstanceState(final Parcelable state) {
+        final SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+        mCurrentArcAngle = ss.mCurrentArcAngle;
+    }
+
+    static class SavedState extends BaseSavedState {
+        float mCurrentArcAngle;
+
+        SavedState(final Parcelable superState) {
+            super(superState);
+        }
+
+        private SavedState(final Parcel in) {
+            super(in);
+            mCurrentArcAngle = in.readFloat();
+        }
+
+        @Override
+        public void writeToParcel(@NonNull final Parcel out, final int flags) {
+            super.writeToParcel(out, flags);
+            out.writeFloat(mCurrentArcAngle);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(final Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(final int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }

@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
             mWidth.setOnChangeListener(listener);
             mHeight.setOnChangeListener(listener);
 
-            mFarmGroup = (RadioGroup) rootView.findViewById(R.id.mini_gauges);
+            mFarmGroup = (RadioGroup) rootView.findViewById(R.id.mini_gauges_group);
             mBigGauge = (OnSetGauge) rootView.findViewById(R.id.gauge);
             mMiniCow = (MiniGauge) rootView.findViewById(R.id.mini_cow);
             mMiniCow.setBigGauge(mBigGauge);

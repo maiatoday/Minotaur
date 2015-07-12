@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.RadioButton;
@@ -147,4 +149,50 @@ public class MiniGauge extends RadioButton {
         mLastValueString = String.valueOf(mlastValue);        updateBigGauge();
         invalidate();
     }
+
+    @NonNull
+    @Override
+    public Parcelable onSaveInstanceState() {
+        final Parcelable superState = super.onSaveInstanceState();
+        final SavedState ss = new SavedState(superState);
+        ss.mCurrentValue = mlastValue;
+        return ss;
+    }
+
+    @Override
+    public void onRestoreInstanceState(final Parcelable state) {
+        final SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+        mlastValue = ss.mCurrentValue;
+    }
+
+    static class SavedState extends BaseSavedState {
+        float mCurrentValue;
+
+        SavedState(final Parcelable superState) {
+            super(superState);
+        }
+
+        private SavedState(final Parcel in) {
+            super(in);
+            mCurrentValue = in.readFloat();
+        }
+
+        @Override
+        public void writeToParcel(@NonNull final Parcel out, final int flags) {
+            super.writeToParcel(out, flags);
+            out.writeFloat(mCurrentValue);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(final Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(final int size) {
+                return new SavedState[size];
+            }
+        };
+    }
+
 }

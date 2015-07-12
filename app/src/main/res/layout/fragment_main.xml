@@ -1,167 +1,209 @@
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_height="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity$PlaceholderFragment">
+
+    <net.maiatoday.minotaur.ui.view.VersionView
+        android:id="@+id/helloText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+
+    <net.maiatoday.minotaur.ui.view.LengthPicker
+        android:id="@+id/length_picker_width"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/helloText" />
+
+    <net.maiatoday.minotaur.ui.view.LengthPicker
+        android:id="@+id/length_picker_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/length_picker_width" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_launcher" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/imageView"
+        android:background="#ffbce9"
+        android:text="xxxx" />
+    <!--@drawable/mini_gauge_selector-->
+
+    <Button
+        android:id="@+id/btn_blank"
+        style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/length_picker_width"
+        android:layout_toEndOf="@+id/length_picker_height"
+        android:layout_toRightOf="@+id/length_picker_height"
+        android:onClick="gotoBlank"
+        android:text="@string/goto_blank" />
+
+    <TextView
+        android:id="@+id/area_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/length_picker_height" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/length_picker_width"
+        android:layout_toEndOf="@+id/length_picker_width"
+        android:layout_toRightOf="@+id/length_picker_width" />
+
+    <HorizontalScrollView
+        android:id="@+id/mini_gauges"
         android:layout_width="match_parent"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".MainActivity$PlaceholderFragment">
-
-        <net.maiatoday.minotaur.ui.view.VersionView
-            android:id="@+id/helloText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
-
-        <net.maiatoday.minotaur.ui.view.LengthPicker
-            android:id="@+id/length_picker_width"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/helloText" />
-
-        <net.maiatoday.minotaur.ui.view.LengthPicker
-            android:id="@+id/length_picker_height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/length_picker_width" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_launcher" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:layout_alignParentRight="true"
-            android:background="#ffbce9"
-            android:text="xxxx"/>
-        <!--@drawable/mini_gauge_selector-->
-
-        <Button
-            android:id="@+id/btn_blank"
-            style="@style/Widget.AppCompat.CompoundButton.RadioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="gotoBlank"
-            android:text="@string/goto_blank"
-            android:layout_below="@+id/length_picker_width"
-            android:layout_toRightOf="@+id/length_picker_height"
-            android:layout_toEndOf="@+id/length_picker_height" />
-
-        <TextView
-            android:id="@+id/area_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/length_picker_height" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/length_picker_width"
-            android:layout_toRightOf="@+id/length_picker_width"
-            android:layout_toEndOf="@+id/length_picker_width" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/area_text"
+        android:gravity="center">
 
         <RadioGroup
-            android:id="@+id/mini_gauges"
-            android:layout_width="match_parent"
+            android:id="@+id/mini_gauges_group"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/area_text"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:background="#7acdff">
+            android:orientation="horizontal">
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_cow"
                 style="@style/MiniGauge"
                 android:checked="true"
                 android:onClick="onRadioButtonClicked"
-                app:mini_title="Moo!"
-                app:mini_subtitle="moomoo"
+                app:default_value="20"
+                app:max_value="100"
                 app:message="moomoomoomoo"
                 app:min_value="0"
-                app:max_value="100"
-                app:default_value="20"
-                app:mini_label="M"/>
+                app:mini_label="M"
+                app:mini_subtitle="moomoo"
+                app:mini_title="Moo!" />
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_lamb"
                 style="@style/MiniGauge"
                 android:onClick="onRadioButtonClicked"
-                app:mini_title="Baa!"
-                app:mini_subtitle="booboo"
+                app:default_value="20"
+                app:max_value="100"
                 app:message="baabaabaa"
                 app:min_value="0"
-                app:max_value="100"
-                app:default_value="20"
-                app:mini_label="B"/>
+                app:mini_label="B"
+                app:mini_subtitle="booboo"
+                app:mini_title="Baa!" />
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_dog"
-                android:onClick="onRadioButtonClicked"
                 style="@style/MiniGauge"
-                app:mini_title="Woof!"
-                app:mini_subtitle="waaoo"
+                android:onClick="onRadioButtonClicked"
+                app:default_value="20"
+                app:max_value="100"
                 app:message="waaoowaaoo"
                 app:min_value="0"
-                app:max_value="100"
+                app:mini_label="W"
+                app:mini_subtitle="waaoo"
+                app:mini_title="Woof!" />
+
+            <net.maiatoday.minotaur.ui.view.MiniGauge
+                android:id="@+id/mini_armadillo"
+                style="@style/MiniGauge"
+                android:onClick="onRadioButtonClicked"
                 app:default_value="20"
-                app:mini_label="W" />
+                app:max_value="100"
+                app:message="gssgssgss"
+                app:min_value="0"
+                app:mini_label="LL"
+                app:mini_subtitle="prrr"
+                app:mini_title="Meeau!" />
+
+            <net.maiatoday.minotaur.ui.view.MiniGauge
+                android:id="@+id/mini_emu"
+                style="@style/MiniGauge"
+                android:onClick="onRadioButtonClicked"
+                app:default_value="20"
+                app:max_value="100"
+                app:message="gssgssgss"
+                app:min_value="0"
+                app:mini_label="E"
+                app:mini_subtitle="prrr"
+                app:mini_title="Meeau!" />
+
+            <net.maiatoday.minotaur.ui.view.MiniGauge
+                android:id="@+id/mini_lemur"
+                style="@style/MiniGauge"
+                android:onClick="onRadioButtonClicked"
+                app:default_value="20"
+                app:max_value="100"
+                app:message="gssgssgss"
+                app:min_value="0"
+                app:mini_label="S\L"
+                app:mini_subtitle="prrr"
+                app:mini_title="Meeau!" />
 
             <net.maiatoday.minotaur.ui.view.MiniGauge
                 android:id="@+id/mini_cat"
                 style="@style/MiniGauge"
                 android:onClick="onRadioButtonClicked"
-                app:mini_title="Meeau!"
-                app:mini_subtitle="prrr"
+                app:default_value="20"
+                app:max_value="100"
                 app:message="gssgssgss"
                 app:min_value="0"
-                app:max_value="100"
-                app:default_value="20"
-                app:mini_label="S"/>
+                app:mini_label="S"
+                app:mini_subtitle="prrr"
+                app:mini_title="Meeau!" />
 
 
         </RadioGroup>
+    </HorizontalScrollView>
 
-        <net.maiatoday.minotaur.ui.view.Gauge
-            android:id="@+id/gauge"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_below="@id/mini_gauges"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="8dp"
-            app:gauge_stroke_width_active="16"
-            app:gauge_stroke_width_inactive="8"
-            app:gauge_animate_set="true">
+    <net.maiatoday.minotaur.ui.view.Gauge
+        android:id="@+id/gauge"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/mini_gauges"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:gauge_animate_set="true"
+        app:gauge_stroke_width_active="16"
+        app:gauge_stroke_width_inactive="8">
 
-            <include layout="@layout/gauge_labels" />
-        </net.maiatoday.minotaur.ui.view.Gauge>
+        <include layout="@layout/gauge_labels" />
+    </net.maiatoday.minotaur.ui.view.Gauge>
 
-        <SeekBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/gauge"
-            android:layout_alignRight="@+id/gauge"
-            android:max="100"/>
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/gauge"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/gauge"
+        android:max="100" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pow"
-            android:id="@+id/buttonPow"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_bug_report_white_24dp"
-            app:fabSize="normal"
-            app:borderWidth="0dp" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/buttonPow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_bug_report_white_24dp"
+        android:text="@string/pow"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
 
-    </RelativeLayout>
+</RelativeLayout>
