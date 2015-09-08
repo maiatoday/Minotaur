@@ -1,6 +1,7 @@
 package net.maiatoday.minotaur.ui.activity;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import net.maiatoday.minotaur.R;
+import net.maiatoday.minotaur.User;
+import net.maiatoday.minotaur.databinding.FragmentMainBinding;
 import net.maiatoday.minotaur.red.Red;
 import net.maiatoday.minotaur.ui.view.LengthPicker;
 import net.maiatoday.minotaur.ui.view.MiniGauge;
@@ -112,10 +116,16 @@ public class MainActivity extends AppCompatActivity {
             updateArea();
         }
 
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            FragmentMainBinding binding = FragmentMainBinding.bind(rootView);
+            User user = new User("Blue", "Moon");
+            binding.setUser(user);
+
             mWidth = (LengthPicker) rootView.findViewById(R.id.length_picker_width);
             mHeight = (LengthPicker) rootView.findViewById(R.id.length_picker_height);
             mArea = (TextView) rootView.findViewById(R.id.area_text);
