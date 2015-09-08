@@ -22,7 +22,8 @@
             android:id="@+id/helloText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+            android:text="@string/hello_world"
+            app:font='@{"Lato-HeavyItalic.ttf"}' />
 
         <net.maiatoday.minotaur.ui.view.LengthPicker
             android:id="@+id/length_picker_width"
@@ -49,7 +50,9 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/imageView"
             android:background="#ffbce9"
-            android:text="xxxx" />
+            android:text="xxxx"
+
+            app:font='@{"Lato-HeavyItalic.ttf"}'/>
         <!--@drawable/mini_gauge_selector-->
 
         <Button
@@ -61,6 +64,7 @@
             android:layout_toEndOf="@+id/length_picker_height"
             android:layout_toRightOf="@+id/length_picker_height"
             android:onClick="gotoBlank"
+            app:font='@{"Lato-HeavyItalic.ttf"}'
             android:text="@string/goto_blank" />
 
         <TextView
@@ -204,17 +208,35 @@
             android:layout_alignTop="@+id/gauge"
             android:padding="16dp">
 
+            <!--app:font='@{"Lato-Regular.ttf"}'-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{user.firstName}"
-                tools:text="name"/>
+                app:font='@{"Lato-Regular.ttf"}'
+                tools:text="name"
+                android:textSize="28sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Blue"
+                tools:text="last"
+                android:textSize="28sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{user.lastName}"
-                tools:text="last"/>
+                tools:text="last"
+                app:font='@{"Lato-HeavyItalic.ttf"}'
+                android:textSize="28sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Moon"
+                tools:text="last"
+                android:textSize="28sp"/>
         </LinearLayout>
 
         <SeekBar
