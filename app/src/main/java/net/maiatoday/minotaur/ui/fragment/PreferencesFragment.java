@@ -1,7 +1,7 @@
 package net.maiatoday.minotaur.ui.fragment;
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
 import net.maiatoday.minotaur.R;

@@ -18,5 +18,7 @@
     <string name="action_xy">Xy</string>
     <string name="action_zzy">Zzy</string>
     <string name="action_delete">Delete</string>
+    <string name="title_activity_sampler_recycler">SamplerRecyclerActivity</string>
+    <string name="action_grue">Grue</string>
 
 </resources>

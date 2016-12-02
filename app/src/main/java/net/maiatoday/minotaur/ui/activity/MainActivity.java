@@ -1,13 +1,11 @@
 package net.maiatoday.minotaur.ui.activity;
 
 import android.content.Intent;
-import android.databinding.BindingAdapter;
-import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -70,9 +67,16 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_xyzzy:
                 gotoTwisty();
                 break;
+            case R.id.action_grue:
+                gotoGrue();
+                break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void gotoGrue() {
+        startActivity(SamplerRecyclerActivity.makeIntent(this));
     }
 
     private void gotoTwisty() {
